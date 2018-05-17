@@ -50,7 +50,8 @@ asciidoctor {
     outputDir 'build/docs/asciidoc'
     backends = ['html5', 'pdf']
 
-    attributes 'source-highlighter': 'coderay',
+    attributes \
+            'source-highlighter': 'coderay',
             'imagesdir': 'images',
             toc                 : 'left',
             'toc-title'           : '目录',

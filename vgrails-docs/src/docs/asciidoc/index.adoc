@@ -10,13 +10,14 @@ Bale Lin, Jason Wu, Harry Lin, Ralph Zheng
 
 include::summary.adoc[]
 
+[[tutorial]]
+== 功能演示
+include::tutorial.adoc[]
+
 [[install]]
-== 安装使用
+== 如何安装
 include::install.adoc[]
 
-[[tutorial]]
-== 安装使用
-include::tutorial.adoc[]
 
 [[appendix_01]]
 == 附录A:

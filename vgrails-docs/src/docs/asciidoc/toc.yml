@@ -1,11 +1,11 @@
 summary:
   title: 整体概述
 
-install:
-  title: 安装使用
-
 tutorial:
-  title: 开发案例
+  title: 功能演示
+
+install:
+  title: 如何安装
 
 appendix_01:
   title: 附录A: Groovy入门
