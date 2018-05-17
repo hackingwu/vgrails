@@ -1,0 +1,14 @@
+summary:
+  title: 整体概述
+
+install:
+  title: 安装使用
+
+tutorial:
+  title: 开发案例
+
+appendix_01:
+  title: 附录A: Groovy入门
+
+appendix_02:
+  title: 附录B: Grails入门

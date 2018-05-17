@@ -1,0 +1,64 @@
+:imagesdir: ./images
+:sectnums:
+
+
+### 业务背景
+主要业务对象包括：
+
+* Organization：代表学校、部、年级、班级等层级结构
+* Student：学生
+* Lesson：课程
+
+[plantuml, org-student-lesson, png]
+----
+
+class 组织
+class 学生
+class 课程
+
+组织 "M" *-- "1" 组织 : 上级
+组织 "1" --* "M" 学生 : 拥有
+组织 "1" --* "M" 课程 : 拥有
+课程 "M" -- "N" 学生 : 多对多
+----
+
+
+### 架构思想
+
+架构的基本思想是：
+
+* 拒绝重复，DRY(Don't Repeat Youself)
+* 约定由于配置，CoC(Convention Over Configuration)
+
+
+[plantuml, test1-test2, png]
+----
+class 重要ge
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+重要 <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+----
+
+[ditaa]
+....
+                   +-------------+
+                   | Asciidoctor |-------+
+                   |   diagram   |       |
+                   +-------------+       | PNG out
+                       ^                 |
+                       | ditaa in        |
+                       |                 v
+ +--------+   +--------+----+    /---------------\
+ |        | --+ Asciidoctor +--> |               |
+ |  Text  |   +-------------+    |   Beautiful   |
+ |Document|   |   !magic!   |    |    Output     |
+ |     {d}|   |             |    |               |
+ +---+----+   +-------------+    \---------------/
+     :                                   ^
+     |          Lots of work             |
+     +-----------------------------------+
+....
