@@ -55,6 +55,10 @@ class Organization{
         level       attributes:[cn: "层级"]，min: 1
         parent      attributes:[cn: "上级"], nullable:true
     }
+
+    String toString(){
+        return name
+    }
 }
 ----
 <1> 模型元数据
@@ -86,6 +90,10 @@ class Shop{
     static constraints = {
         name        attributes:[cn: "名称"], size: [2..32], unique:true
         parent      attributes:[cn: "归属组织"], nullable:false
+    }
+
+    String toString(){
+        return name
     }
 }
 ----
