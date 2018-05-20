@@ -1,4 +1,4 @@
-package vgrails.framework.plugin
+package vgrails.scaffolding
 
 class BootStrap {
 

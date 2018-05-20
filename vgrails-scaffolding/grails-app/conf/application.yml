@@ -2,7 +2,7 @@
 grails:
     profile: web-plugin
     codegen:
-        defaultPackage: com.vgrails.framework
+        defaultPackage: vgrails.scaffolding
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events

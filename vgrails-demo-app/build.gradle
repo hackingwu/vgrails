@@ -78,4 +78,8 @@ assets {
     minifyJs = true
     minifyCss = true
 }
-grails { plugins { compile project(':vgrails-framework-plugin')}}
+grails { 
+	plugins { 
+		compile project(':vgrails-scaffolding')
+	}
+}

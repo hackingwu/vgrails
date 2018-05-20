@@ -1,4 +1,4 @@
-package vgrails.framework.plugin
+package vgrails.scaffolding
 
 import grails.boot.*
 import grails.boot.config.GrailsAutoConfiguration

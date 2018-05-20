@@ -1,8 +1,8 @@
-package vgrails.framework.plugin
+package vgrails.scaffolding
 
 import grails.plugins.*
 
-class VgrailsFrameworkPluginGrailsPlugin extends Plugin {
+class VgrailsScaffoldingGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "3.3.5 > *"
@@ -12,21 +12,21 @@ class VgrailsFrameworkPluginGrailsPlugin extends Plugin {
     ]
 
     // TODO Fill in these fields
-    def title = "Vgrails Framework Plugin" // Headline display name of the plugin
-    def author = "Your name"
-    def authorEmail = ""
+    def title = "vgrails Scaffolding" // Headline display name of the plugin
+    def author = "bale_lin"
+    def authorEmail = "bale_lin@163.com"
     def description = '''\
-Brief summary/description of the plugin.
+基于GRAILS3、VUE和ANT.DESIGN的企业级应用快速开发脚手架
 '''
     def profiles = ['web']
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/vgrails-framework-plugin"
+    def documentation = "http://grails.org/plugin/vgrails-scaffolding"
 
     // Extra (optional) plugin metadata
 
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-//    def license = "APACHE"
+    def license = "GPL3"
 
     // Details of company behind the plugin (if there is one)
 //    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]

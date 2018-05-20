@@ -1,6 +1,6 @@
-# VGRAILS企业应用快速开发平台
-基于GRAILS3、VUE和IVIEW的企业级应用快速开发框架
+# VGRAILS企业应用快速开发脚手架
+基于GRAILS3、VUE和ANT.DESIGN的企业级应用快速开发脚手架
 
 * `vgrails-demp-app`: 演示应用
-* `vgrails-framework-plugin`: 框架插件
-* `vgrails-docs`: 框架文档
+* `vgrails-scaffolding`: 脚手架插件
+* `vgrails-docs`: 脚手架文档
