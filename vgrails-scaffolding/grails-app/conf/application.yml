@@ -10,7 +10,7 @@ grails:
             events: false
 info:
     app:
-        name: '@info.app.name@'
+        name: '@info.app.propertyName@'
         version: '@info.app.version@'
         grailsVersion: '@info.app.grailsVersion@'
 spring:

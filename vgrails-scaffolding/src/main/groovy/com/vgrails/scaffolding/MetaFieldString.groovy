@@ -13,21 +13,21 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class MetaFieldString extends MetaField{
     /** 是否可空 */
-    boolean nullable
+    boolean nullable=false
     /** 是否允许仅用空格 */
-    boolean blank
-    /** 只允许列表值 */
+    boolean blank=false
+    /** 允许列表值 */
     List<String> inList
-    /** 最大长度 */
-    int maxSize
-    /** 最小长度 */
-    int minSize
+    /** 长度范围 */
+    Range<Integer> size
     /** 匹配正则 */
     String matches
     /** 手机 */
     boolean mobile
     /** 密码 */
     boolean password
-    /** 默认值 */
-    String defaults
+    /** URL */
+    boolean url
+    /** 不等于 */
+    String notEqual
 }

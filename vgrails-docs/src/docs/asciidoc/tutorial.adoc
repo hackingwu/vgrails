@@ -35,7 +35,7 @@ class Organization{
 
     //元数据
     static m = [
-        cn: "组织", //<1>
+        locale: "组织", //<1>
         search: [type: "AJAX", fields:['name', 'level']]  //<2>
         layout = [  //<3>
                 ['parent', 'level']
@@ -50,9 +50,9 @@ class Organization{
 
     //约束
     static constraints = {
-        name        attributes:[cn: "名称"], size: [2..32], unique:true   //<4>
-        level       attributes:[cn: "层级"]，min: 1
-        parent      attributes:[cn: "上级"], nullable:true
+        name        attributes:[locale: "名称"], size: [2..32], unique:true   //<4>
+        level       attributes:[locale: "层级"]，min: 1
+        parent      attributes:[locale: "上级"], nullable:true
     }
 
     String toString(){
@@ -73,7 +73,7 @@ class Shop{
 
     //元数据
     static m = [
-        cn: "门店",
+        locale: "门店",
         search: [type: "AJAX", fields:['name']]
         layout = [
                 ['owner']
@@ -87,8 +87,8 @@ class Shop{
 
     //约束
     static constraints = {
-        name        attributes:[cn: "名称"], size: [2..32], unique:true
-        parent      attributes:[cn: "归属组织"], nullable:false
+        name        attributes:[locale: "名称"], size: [2..32], unique:true
+        parent      attributes:[locale: "归属组织"], nullable:false
     }
 
     String toString(){

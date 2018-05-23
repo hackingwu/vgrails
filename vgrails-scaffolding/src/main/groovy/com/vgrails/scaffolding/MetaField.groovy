@@ -1,6 +1,7 @@
 package com.vgrails.scaffolding
 
 import grails.compiler.GrailsCompileStatic
+import grails.gorm.validation.DefaultConstrainedProperty
 
 /**
  * 属性基类
@@ -24,21 +25,21 @@ class MetaField {
     static int VG_SORT_OFF = 0
 
     /** 名称 */
-    String name
+    String propertyName
     /** 类型 */
     String type
     /** 控件类型 */
     String widget
-    /** 本地化，如：name='name' locale='姓名' */
+    /** 本地化，如：propertyName='propertyName' locale='姓名' */
     String locale
     /** 表格列宽占比 */
     int flex=1
     /** 是否支持排序 */
     int sort=0
-    /** grid列显示自定义回调接口，场景：性别男女，用男女小图标表示 */
-    String renderer
     /** 是否唯一 */
     boolean unique
+    /** 是否可编辑 */
+    boolean editable
 
     /**
      * 不设置本地化，则使用名称
@@ -46,9 +47,31 @@ class MetaField {
      */
     String getLocale(){
         if(locale == null || locale == "" || locale.trim()=="") {
-            return name
+            return propertyName
         }else{
             return locale
+        }
+    }
+
+    void CopyFromConstraint(DefaultConstrainedProperty cp){
+
+        Set<String> fieldKeySet=properties.keySet()
+        Set<String> constraintKeySet=cp.properties.keySet() + cp.attributes.keySet()
+
+        Set<String> needToCopyKeySet=fieldKeySet.intersect(constraintKeySet)
+        needToCopyKeySet.remove("class")
+
+        for(String key : needToCopyKeySet ){
+            try {
+                if (cp.properties.containsKey(key)) {
+                    this[key] = cp[key]
+                }else{
+                    this[key] = cp.attributes[key]
+                }
+            }catch(Exception e){
+                println e.message
+                println key
+            }
         }
     }
 }

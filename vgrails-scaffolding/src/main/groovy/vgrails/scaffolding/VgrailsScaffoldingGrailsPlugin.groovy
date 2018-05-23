@@ -12,7 +12,7 @@ class VgrailsScaffoldingGrailsPlugin extends Plugin {
     ]
 
     // TODO Fill in these fields
-    def title = "vgrails Scaffolding" // Headline display name of the plugin
+    def title = "vgrails Scaffolding" // Headline display propertyName of the plugin
     def author = "bale_lin"
     def authorEmail = "bale_lin@163.com"
     def description = '''\
@@ -29,10 +29,10 @@ class VgrailsScaffoldingGrailsPlugin extends Plugin {
     def license = "GPL3"
 
     // Details of company behind the plugin (if there is one)
-//    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
+//    def organization = [ propertyName: "My Company", url: "http://www.my-company.com/" ]
 
     // Any additional developers beyond the author specified above.
-//    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
+//    def developers = [ [ propertyName: "Joe Bloggs", email: "joe@bloggs.net" ]]
 
     // Location of the plugin's issue tracker.
 //    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]

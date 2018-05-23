@@ -1,6 +1,10 @@
 package com.vgrails.scaffolding
 
 import grails.compiler.GrailsCompileStatic
+import grails.core.GrailsClass
+import grails.core.GrailsDomainClass
+import grails.util.Holders
+import com.vgrails.demo.*
 
 /**
  * 负责提供Domain的元模型数据，包括：
@@ -19,12 +23,39 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class MetaModelHolder {
 
+    static Map<String, MetaModel> metaModelMap=[:]
+
+    boolean IsDomain(String domain){
+        return true
+    }
+
     /**
      * 获取领域模型元数据
-     * @param domain 首字母小写的模型名称，如：student获取领域模型(Student)的元数据
+     * @param model 首字母小写的模型名称，如：student获取领域模型(Student)的元数据
      * @return 模型元数据
      */
-    static MetaModel GetModel(String domain){
 
+    synchronized static MetaModel GetModel(String model){
+        if(metaModelMap[model]!=null){
+            return metaModelMap[model]
+        }
+        MetaModel metaModel=new MetaModel()
+
+        println Holders.applicationContext.containsBean("com.vgrails.demo.Organization")
+        println Holders.grailsApplication.mappingContext.getPersistentEntity("com.vgrails.demo.Organization")
+        println Holders.grailsApplication.mappingContext.getPersistentEntity("Organization")
+        println Holders.grailsApplication.mappingContext.getPersistentEntity("organization")
+
+        GrailsClass domainClass = Holders.grailsApplication.getArtefactByLogicalPropertyName("Domain", model)
+
+        //模型不存在
+        if(domainClass == null) {
+            return null
+        }
+
+        println "==========================>"
+
+        metaModelMap[model]=metaModel
+        return metaModel
     }
 }

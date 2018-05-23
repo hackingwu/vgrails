@@ -27,7 +27,10 @@ class MetaDomain {
     /** 搜索类型，取值：ajax, standard, advanced */
     String searchType
     /** 搜索属性列表 */
-    List<String> searchField
+    List<String> searchFields
+
+    /** 表单布局 */
+    List<List<String>> layout
 
     /**
      * 不设置本地化，则使用名称
