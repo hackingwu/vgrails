@@ -1,5 +1,6 @@
 package com.vgrails.scaffolding
 
+import com.vgrails.demo.Organization
 import grails.gorm.validation.DefaultConstrainedProperty
 import grails.util.Holders
 
@@ -100,6 +101,8 @@ class MetaModelService {
         //赋值并缓存结果
         metaModel.metaDomain=domain
         metaModel.fields=fields
+        metaModel.transients=clazz.transients
+
         metaModelMap[model]=metaModel
 
         return metaModel

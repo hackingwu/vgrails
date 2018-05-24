@@ -1,9 +1,15 @@
 package com.vgrails.scaffolding
 
-import grails.testing.services.ServiceUnitTest
+import grails.testing.mixin.integration.Integration
+import grails.transaction.*
+import grails.util.Holders
+import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 
-class MetaModelServiceSpec extends Specification implements ServiceUnitTest<MetaModelService>{
+@Integration
+@Rollback
+class MetaModelServiceSpec extends Specification {
+
 
     def setup() {
     }
@@ -11,8 +17,17 @@ class MetaModelServiceSpec extends Specification implements ServiceUnitTest<Meta
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "正常: 获取grailsApplication"() {
+        expect:"获取grailsApplication"
+            Holders.grailsApplication != null
+    }
+
+    void "正常: 获取模型"() {
+        expect:"获取模型"
+            MetaModelService.GetModel("organization").metaDomain.locale=="组织"
+            MetaModelService.GetModel("shop").metaDomain.locale=="门店"
+
+            //不加这行似乎无法通过测试
+            println "DONE!"
     }
 }

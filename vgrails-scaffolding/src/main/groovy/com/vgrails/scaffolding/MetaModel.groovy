@@ -4,12 +4,10 @@ import grails.compiler.GrailsCompileStatic
 
 @GrailsCompileStatic
 class MetaModel {
+    /** 领域模型元数据 */
     MetaDomain metaDomain
+    /** 属性清单 */
     List<MetaField> fields
-
-    Set<MetaField> transientsFields
-    Set<MetaField> oneToManyFields
-    Set<MetaField> manyToManyFields
-    Set<MetaField> objectsFields
-    Set<MetaField> enumsFields
+    /** 非持久化的属性 */
+    Set<String> transients
 }
