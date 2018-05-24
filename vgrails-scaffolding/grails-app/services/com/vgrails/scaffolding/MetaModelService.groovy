@@ -49,7 +49,8 @@ class MetaModelService {
         MetaDomain domain= new MetaDomain()
         List<MetaField> fields=[]
 
-        //TODO: 需要进一步确认是否需要排序，目测已经按照order(定义顺序)排序
+        //NOTE: 需要进一步确认是否需要排序，目测已经按照order(定义顺序)排序
+        //需要显示的属性=定义约束的属性(基于约束顺序)
         List<DefaultConstrainedProperty> constraints = clazz.getConstrainedProperties().values()*.property
 
         domain.name=model
@@ -58,7 +59,7 @@ class MetaModelService {
 
         Map m=clazz.m
         //如果m为空，填写默认值
-        if(m==null)
+        if(m!=null)
         {
             domain.locale=m.locale
             domain.searchType=m.search?.type
@@ -72,12 +73,13 @@ class MetaModelService {
         }
 
         //------------------------------------------------------------------
-        //查找适合显示的属性(基于约束顺序)
+        //生成属性列表
         //------------------------------------------------------------------
+        //获取关联属性列表
+        //List<Association> associations=Holders.grailsApplication.mappingContext.getPersistentEntity("${domain.packageName}.${domain.type}").getAssociations()
+
         for(int i=0;i<constraints.size();i++){
-
             MetaField field
-
             if(constraints[i].propertyType.simpleName == "String")
             {
                 field=new MetaFieldString()
@@ -85,16 +87,21 @@ class MetaModelService {
             {
                 field=new MetaFieldLong()
             }
-
+            //TODO: 需要考虑，embed和enum; 另外关系可能有One2One和Many2Many
+            else{
+                field=new MetaFieldAssociation()
+                field.associationType=MetaFieldAssociation.MANY_TO_ONE
+                field.associationDomain=constraints[i].propertyType.simpleName
+            }
             field.CopyFromConstraint(constraints[i])
             fields.add(field)
         }
 
+        //赋值并缓存结果
         metaModel.metaDomain=domain
         metaModel.fields=fields
         metaModelMap[model]=metaModel
+
         return metaModel
     }
 }
-
-

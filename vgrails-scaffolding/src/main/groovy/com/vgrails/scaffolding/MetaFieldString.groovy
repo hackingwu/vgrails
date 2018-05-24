@@ -30,4 +30,7 @@ class MetaFieldString extends MetaField{
     boolean url
     /** 不等于 */
     String notEqual
+    /** 控件类型 */
+    String widget="TextField"
+
 }

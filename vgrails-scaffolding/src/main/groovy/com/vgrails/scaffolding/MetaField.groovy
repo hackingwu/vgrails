@@ -28,8 +28,6 @@ class MetaField {
     String propertyName
     /** 类型 */
     String type
-    /** 控件类型 */
-    String widget
     /** 本地化，如：propertyName='propertyName' locale='姓名' */
     String locale
     /** 表格列宽占比 */
@@ -53,19 +51,26 @@ class MetaField {
         }
     }
 
+    /**
+     * 从Constraint拷贝约束条件到自身
+     * @param cp
+     *
+     * @note 通过命名一致约定，只要COPY属性的交集
+     */
     void CopyFromConstraint(DefaultConstrainedProperty cp){
 
+        //生成待拷贝键值列表needToCopyKeySet
         Set<String> fieldKeySet=properties.keySet()
         Set<String> constraintKeySet=cp.properties.keySet() + cp.attributes.keySet()
-
         Set<String> needToCopyKeySet=fieldKeySet.intersect(constraintKeySet)
         needToCopyKeySet.remove("class")
 
         for(String key : needToCopyKeySet ){
             try {
-                if (cp.properties.containsKey(key)) {
+                //仅拷贝非空值
+                if (cp.properties.containsKey(key) && cp.properties.containsKey(key)!=null) {
                     this[key] = cp[key]
-                }else{
+                }else if(cp.attributes[key]!=null){
                     this[key] = cp.attributes[key]
                 }
             }catch(Exception e){
@@ -73,5 +78,8 @@ class MetaField {
                 println key
             }
         }
+
+        //复制类型名称
+        type=cp.propertyType.simpleName
     }
 }

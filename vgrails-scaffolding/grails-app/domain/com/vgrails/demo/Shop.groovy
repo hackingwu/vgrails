@@ -18,9 +18,9 @@ class Shop {
     String              address
     Organization        owner
     static constraints = {
+        owner           attributes:[locale: "归属"], min:0, max: 32
         name            attributes:[locale: "名称"], size: 2..32, unique: true
         address         attributes:[locale: "地址"], nullable: true
-        owner           attributes:[locale: "归属"], min:0, max: 32
     }
 
     String toString(){
