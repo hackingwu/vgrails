@@ -1,5 +1,6 @@
 package com.vgrails.scaffolding
 
+import com.sun.org.apache.xpath.internal.operations.Or
 import com.vgrails.demo.Organization
 import grails.gorm.validation.DefaultConstrainedProperty
 import grails.util.Holders
@@ -50,9 +51,13 @@ class MetaModelService {
         MetaDomain domain= new MetaDomain()
         List<MetaField> fields=[]
 
-        //NOTE: 需要进一步确认是否需要排序，目测已经按照order(定义顺序)排序
         //需要显示的属性=定义约束的属性(基于约束顺序)
         List<DefaultConstrainedProperty> constraints = clazz.getConstrainedProperties().values()*.property
+        //NOTE: 需要进一步确认是否需要排序，目测已经按照order(定义顺序)排序
+
+        for(int i=0;i<constraints.size();i++){
+            println constraints[i].propertyName
+        }
 
         domain.name=model
         domain.type=clazz.simpleName
@@ -98,10 +103,17 @@ class MetaModelService {
             fields.add(field)
         }
 
+        //获取非持久化属性清单，需要把Id结尾的属性去掉
+        List<String> transients=clazz.transients
+        for(int i=0;i<transients.size();i++){
+            if(transients[i].endsWith("Id")==false){
+                metaModel.transients.add(transients[i])
+            }
+        }
+
         //赋值并缓存结果
         metaModel.metaDomain=domain
         metaModel.fields=fields
-        metaModel.transients=clazz.transients
 
         metaModelMap[model]=metaModel
 

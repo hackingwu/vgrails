@@ -27,7 +27,8 @@ class MetaModelServiceSpec extends Specification {
             MetaModelService.GetModel("organization").metaDomain.locale=="组织"
             MetaModelService.GetModel("shop").metaDomain.locale=="门店"
 
-            //不加这行似乎无法通过测试
-            println "DONE!"
+            Set<String> transients=MetaModelService.GetModel("organization").transients
+            transients.size() == 1
+            transients[0]== "label"
     }
 }
