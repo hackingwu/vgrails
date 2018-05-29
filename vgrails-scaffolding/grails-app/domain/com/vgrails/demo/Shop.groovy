@@ -5,22 +5,24 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class Shop {
 
+    static transients = ['address']
     static m = [
             locale: "门店",
-            search: [type: "standard", fields:['name']],
+            search: [type: "ajax", fields:['name']],
             layout: [
-                    ['owner', 'name'],
-                    ['address']
+                    ['parent', 'level'],
+                    ['name']
             ]
     ]
 
-    String              name
     String              address
+    String              name
     Organization        owner
+
     static constraints = {
-        address         attributes:[locale: "地址"], nullable: true
-        owner           attributes:[locale: "归属"], min:0, max: 32
-        name            attributes:[locale: "名称"], size: 2..32, unique: true
+        owner          attributes:[locale: "上级"], nullable: true
+        address        attributes:[locale: "标签"], nullable: true
+        name           attributes:[locale: "名称"], size: 2..32, unique: true
     }
 
     String toString(){

@@ -38,7 +38,7 @@ class MetaModelService {
             return metaModelMap[model]
         }
 
-        def clazz = Holders.grailsApplication.getArtefactByLogicalPropertyName("Domain", model).clazz
+        def clazz = Holders.grailsApplication.getArtefactByLogicalPropertyName("Domain", model)?.clazz
         //所查模型不存在
         if(clazz == null){
             return null

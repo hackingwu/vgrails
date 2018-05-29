@@ -15,6 +15,8 @@ class Organization {
             ]
     ]
 
+    static hasMany = [students: Student]
+
     String              label
     String              name
     long                level
@@ -24,6 +26,11 @@ class Organization {
         label           attributes:[locale: "标签"], nullable: true
         name            attributes:[locale: "名称"], size: 2..32, unique: true
         level           attributes:[locale: "层级"], min:0l, max: 32l
+    }
+
+    static mapping = {
+        version     false
+        table       'organization'
     }
 
     String getLabel(){
