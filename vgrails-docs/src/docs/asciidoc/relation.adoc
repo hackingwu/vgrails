@@ -29,7 +29,7 @@ class Student{
     //约束
     static constraints = {
         ...
-        studentCard attributes:[locale: "学生证", associationType: 'one-to-one'], nullable:true    //<2>
+        studentCard attributes:[associationType: 'one-to-one'] //<2>
         ...
     }
 }
@@ -56,7 +56,7 @@ class Student{
     //约束
     static constraints = {
         ...
-        owner attributes:[locale: "归属组织", associationType: 'one-to-many'], nullable:true    //<2>
+        owner attributes:[associationType: 'one-to-many'], nullable:true    //<2>
         owner attributes:[locale: "归属组织"], nullable:true    //<3>
         ...
     }
@@ -84,8 +84,8 @@ class Lesson{
     List<Student> freeSelectd       //<3>
 
     static constraints = {
-         suggestSelectd attributes:[locale: "建议选择", associationType: "many-to-many"], nullable:true    //<4>
-         freeSelectd    attributes:[locale: "自由选择"], nullable:true    //<5>
+         suggestSelectd attributes:[associationType: "many-to-many"]//<4>
+         freeSelectd    attributes:[locale: "自由选择"]//<5>
     }
 }
 
