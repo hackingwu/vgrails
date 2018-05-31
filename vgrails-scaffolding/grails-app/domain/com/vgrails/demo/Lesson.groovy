@@ -1,29 +1,18 @@
 package com.vgrails.demo
 
+import com.vgrails.scaffolding.MetaFieldAssociation
 import grails.compiler.GrailsCompileStatic
 
 @GrailsCompileStatic
 class Lesson {
 
-    static m = [
-            locale: "课程",
-            search: [type: "ajax", fields:['name']],
-            layout: [
-                    ['name'],
-                    ['remark']
-            ]
-    ]
+    static transients = ['selfSelected', 'suggestSelected']
 
-    static hasMany = [students: Student]
+    List<Student> selfSelected
+    List<Student> suggestSelected
 
-    String              name
-    String              remark
     static constraints = {
-        name            attributes:[locale: "名称"], size: 2..32, unique: true
-        remark          attributes:[locale: "简介"], size: 2..255
-    }
-
-    String toString(){
-        return name
+        selfSelected        attributes:[associationType: MetaFieldAssociation.many_to_many, associationDomain: 'student']
+        suggestSelected     attributes:[associationType: MetaFieldAssociation.many_to_many, associationDomain: 'student']
     }
 }

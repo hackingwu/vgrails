@@ -10,8 +10,6 @@ class StudentCard {
             ]
     ]
 
-    static hasOne = [student:Student]   //one-to-one
-
     String              studentNumber
     String              name
     String              photo

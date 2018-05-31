@@ -1,31 +1,22 @@
 package com.vgrails.demo
 
+import com.vgrails.scaffolding.MetaFieldAssociation
+
 class Student {
 
-    static m = [
-            locale: "学生",
-            search: [type: "ajax", fields:['name']],
-            layout: [
-                    ['studentNumber','name'],
-                    ['remark']
-            ]
-    ]
+    static transients = ['selfSelected', 'suggestSelected']
 
-    static hasMany = [lessons: Lesson]
+    List<Lesson> selfSelected
+    List<Lesson> suggestSelected
+
+    Organization owner
+    StudentCard         studentCard
 
 
-    StudentCard         studentCard //one-to-one
-
-    String              studentNumber
-    String              name
-    String              remark
     static constraints = {
-        studentNumber   attributes:[locale: "学生证号"], size: 8..8
-        name            attributes:[locale: "姓名"], size: 2..32
-        remark          attributes:[locale: "备注"], size: 2..255
-    }
-
-    String toString(){
-        return name
+        studentCard         attributes:[associationType: MetaFieldAssociation.one_to_one, associationDomain: 'studentCard'], nullable:true
+        selfSelected        attributes:[associationType: MetaFieldAssociation.many_to_many, associationDomain: 'lesson'], nullable:true
+        suggestSelected     attributes:[associationType: MetaFieldAssociation.many_to_many, associationDomain: 'lesson'], nullable:true
+        owner               attributes:[associationType: MetaFieldAssociation.one_to_many, associationDomain: 'organization'], nullable:true
     }
 }

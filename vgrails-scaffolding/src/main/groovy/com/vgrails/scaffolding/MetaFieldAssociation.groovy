@@ -13,14 +13,14 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class MetaFieldAssociation extends MetaField{
 
-    static int ONE_TO_ONE=1
-    static int MANY_TO_ONE=2
-    static int MANY_TO_MANY=4
+    static String one_to_one="one-to-one"
+    static String one_to_many="one-to-many"
+    static String many_to_many="many-to-many"
 
     /** 是否可空 */
     boolean nullable=false
     /** 关系类型 */
-    int associationType=MANY_TO_ONE
+    String associationType
     /** 关联模型 */
     String associationDomain
 }

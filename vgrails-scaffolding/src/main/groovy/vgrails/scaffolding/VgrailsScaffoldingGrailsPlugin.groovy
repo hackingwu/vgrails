@@ -16,7 +16,7 @@ class VgrailsScaffoldingGrailsPlugin extends Plugin {
     def author = "bale_lin"
     def authorEmail = "bale_lin@163.com"
     def description = '''\
-基于GRAILS3、VUE和ANT.DESIGN的企业级应用快速开发脚手架
+基于GRAILS3、VUE和IVIEW的企业级应用快速开发脚手架
 '''
     def profiles = ['web']
 

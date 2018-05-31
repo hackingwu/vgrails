@@ -1,7 +1,5 @@
 package com.vgrails.scaffolding
 
-import com.sun.org.apache.xpath.internal.operations.Or
-import com.vgrails.demo.Organization
 import grails.gorm.validation.DefaultConstrainedProperty
 import grails.util.Holders
 
@@ -24,7 +22,6 @@ import grails.util.Holders
 class MetaModelService {
 
     static transactional = false
-    static List<String> excludeProperites=['']
     static Map<String, MetaModel> metaModelMap=[:]
 
     /**
@@ -55,15 +52,14 @@ class MetaModelService {
         List<DefaultConstrainedProperty> constraints = clazz.getConstrainedProperties().values()*.property
         //NOTE: 需要进一步确认是否需要排序，目测已经按照order(定义顺序)排序
 
-        for(int i=0;i<constraints.size();i++){
-            println constraints[i].propertyName
-        }
-
         domain.name=model
         domain.type=clazz.simpleName
         domain.packageName=clazz.package.name
 
-        Map m=clazz.m
+        Map m=null
+        //忽略未定义m引起的MissingPropertyException
+        try{ m=clazz['m']}catch(Exception e){}
+
         //如果m为空，填写默认值
         if(m!=null)
         {
@@ -93,11 +89,24 @@ class MetaModelService {
             {
                 field=new MetaFieldLong()
             }
-            //TODO: 需要考虑，embed和enum; 另外关系可能有One2One和Many2Many
+            //TODO: 需要考虑，embed和enum
             else{
                 field=new MetaFieldAssociation()
-                field.associationType=MetaFieldAssociation.MANY_TO_ONE
-                field.associationDomain=constraints[i].propertyType.simpleName
+
+                if(constraints[i].attributes != null)
+                {
+                    if(constraints[i].attributes['associationType']!=null){
+                        field.associationType=constraints[i].attributes['associationType']
+                    }else{
+                        println "domain: ${model} property:${constraints[i].propertyName} associationType constraints UNSET!"
+                    }
+
+                    if(constraints[i].attributes['associationDomain']!=null){
+                        field.associationDomain=constraints[i].attributes['associationDomain']
+                    }else{
+                        println "domain: ${model} property:${constraints[i].propertyName} associationDomain constraints UNSET!"
+                    }
+                }
             }
             field.CopyFromConstraint(constraints[i])
             fields.add(field)

@@ -2,11 +2,16 @@
 :sectnums:
 
 
-### 领域模型间关系
+### 领域模型间关系的定义
+
+框架对实体的关系处理仅包括：
 
 * 一对一：one-to-one
 * 一对多：one-to-many
 * 多对多：many-to-many
+
+其中级联删除框架不进行处理
+
 
 ### 一对一(one-to-one)
 
@@ -29,14 +34,14 @@ class Student{
     //约束
     static constraints = {
         ...
-        studentCard attributes:[associationType: 'one-to-one'] //<2>
+        studentCard attributes:[associationType: 'one-to-one', associationDomain: "studentCard"] //<2>
         ...
     }
 }
 
 ----
 <1> 在`学生`对象中声明对`学生证`对象的应用
-<2> 定义该关联类型为`one-to-one`, 框架会在自动生成的代码中添加同一学生证不会被多个学生使用的校验
+<2> 定义该关联类型为`one-to-one`
 
 ### 一对多(one-to-many)
 
@@ -56,15 +61,13 @@ class Student{
     //约束
     static constraints = {
         ...
-        owner attributes:[associationType: 'one-to-many'], nullable:true    //<2>
-        owner attributes:[locale: "归属组织"], nullable:true    //<3>
+        owner attributes:[associationType: 'one-to-many', associationDomain: 'organization'], nullable:true    //<2>
         ...
     }
 }
 ----
 <1> 在`学生`对象中声明对`组织`对象的应用
 <2> 定义该关联类型为`one-to-many`
-<3> 如果省略关系类型，框架也会默认推导类型为：`one-to-many`
 
 ### 多对多(many-to-many)
 
@@ -73,37 +76,31 @@ class Student{
 学生 "m" -- "n" 课程: 选修课程
 ----
 
-假设业务需求为记录建议选修课程和自由选修课程，对应模型的精简代码如下：
+假设业务需求为记录建议选修课程，对应模型的精简代码如下：
 [source,groovy]
 ----
 class Lesson{
 
-    static transients = ['suggestSelectd', 'freeSelectd']   //<1>
+    static transients = ['suggestSelectd']   //<1>
 
     List<Student> suggestSelectd    //<2>
-    List<Student> freeSelectd       //<3>
 
     static constraints = {
-         suggestSelectd attributes:[associationType: "many-to-many"]//<4>
-         freeSelectd    attributes:[locale: "自由选择"]//<5>
+         suggestSelectd attributes:[associationType: "many-to-many", associationDomain: "student"]//<3>
     }
 }
 
 class Student{
 
-    static transients = ['suggestSelectd', 'freeSelectd']
+    static transients = ['suggestSelectd']
 
     List<Lesson> suggestSelectd
-    List<Lesson> freeSelectd
 
     static constraints = {
-        suggestSelectd attributes:[locale: "建议选择"], nullable:true
-        freeSelectd    attributes:[locale: "自由选择"], nullable:true
+        suggestSelectd attributes:[associationType: "many-to-many", associationDomain: "lesson"], nullable:true
     }
 }
 ----
 <1> 在对象中声明多对多属性为transients
 <2> 定义属性
-<3> 定义属性
-<4> 定义约束，并指定类型
-<5> 如果省略关系类型，框架也会默认推导类型为：`many-to-many`
+<3> 定义约束，并指定类型

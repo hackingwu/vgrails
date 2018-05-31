@@ -34,6 +34,18 @@ class MetaModelServiceSpec extends Specification {
             transients[0]== "label"
     }
 
+    void "正常: 获取模型关系"() {
+        expect:"获取模型关系"
+            MetaModelService.GetModel("lesson").fields.each{ MetaFieldAssociation f->
+                assert f.associationType == MetaFieldAssociation.many_to_many
+                assert f.associationDomain in [ 'lesson','student']
+            }
+
+            MetaModelService.GetModel("organization") != null
+            MetaModelService.GetModel("student") != null
+            MetaModelService.GetModel("studentCard") != null
+    }
+
     void "异常: 获取不存在模型"() {
         expect:"获取NULL"
             MetaModelService.GetModel("org")==null
@@ -43,8 +55,8 @@ class MetaModelServiceSpec extends Specification {
 
     void "并发: 获取模型"() {
         expect:"获取模型"
-            int THREAD_NUM=10
-            int THREAD_OP_TIMES=100000
+            int THREAD_NUM=4
+            int THREAD_OP_TIMES=10000
 
             List<Thread> threads=[]
 
@@ -64,6 +76,6 @@ class MetaModelServiceSpec extends Specification {
 
             println "总数:${THREAD_OP_TIMES*THREAD_NUM} 耗时:${duration.toString()} ${THREAD_OP_TIMES*THREAD_NUM*1000/duration.toMilliseconds()} 操作/秒"
 
-            THREAD_OP_TIMES*THREAD_NUM*1000/duration.toMilliseconds() > 100000
+            THREAD_OP_TIMES*THREAD_NUM*1000/duration.toMilliseconds() > 1000
     }
 }

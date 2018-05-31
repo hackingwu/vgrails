@@ -61,7 +61,7 @@ class MetaField {
 
         //生成待拷贝键值列表needToCopyKeySet
         Set<String> fieldKeySet=properties.keySet()
-        Set<String> constraintKeySet=cp.properties.keySet() + cp.attributes.keySet()
+        Set<String> constraintKeySet=cp.properties.keySet() + cp.attributes?.keySet()
         Set<String> needToCopyKeySet=fieldKeySet.intersect(constraintKeySet)
         needToCopyKeySet.remove("class")
 
