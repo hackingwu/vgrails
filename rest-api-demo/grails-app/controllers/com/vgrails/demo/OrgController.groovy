@@ -1,56 +1,55 @@
 package com.vgrails.demo
 
 import com.vgrails.scaffolding.MetaModelService
-import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class EmployeeController {
+class OrgController {
 
-    EmployeeService employeeService
+    OrgService orgService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond employeeService.list(params), model:[employeeCount: employeeService.count()]
+        respond orgService.list(params), model:[orgCount: orgService.count()]
     }
 
     def show(Long id) {
-        respond employeeService.get(id)
+        respond orgService.get(id)
     }
 
-    def save(Employee employee) {
-        if (employee == null) {
+    def save(Org org) {
+        if (org == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            employeeService.save(employee)
+            orgService.save(org)
         } catch (ValidationException e) {
-            respond employee.errors, view:'create'
+            respond org.errors, view:'create'
             return
         }
 
-        respond employee, [status: CREATED, view:"show"]
+        respond org, [status: CREATED, view:"show"]
     }
 
-    def update(Employee employee) {
-        if (employee == null) {
+    def update(Org org) {
+        if (org == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            employeeService.save(employee)
+            orgService.save(org)
         } catch (ValidationException e) {
-            respond employee.errors, view:'edit'
+            respond org.errors, view:'edit'
             return
         }
 
-        respond employee, [status: OK, view:"show"]
+        respond org, [status: OK, view:"show"]
     }
 
     def delete(Long id) {
@@ -59,16 +58,14 @@ class EmployeeController {
             return
         }
 
-        employeeService.delete(id)
+        orgService.delete(id)
 
         render status: NO_CONTENT
     }
 
     def meta() {
 
-        //respond employeeService.list(params), model:[employeeCount: employeeService.count()]
-
-        respond MetaModelService.GetModel("employee")
+        respond MetaModelService.GetModel("org")
 
         return
     }
