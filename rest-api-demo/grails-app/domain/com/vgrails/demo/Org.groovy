@@ -1,8 +1,9 @@
 package com.vgrails.demo
 
 import grails.rest.Resource
+import rest.api.demo.VRestfulController
 
-@Resource(uri = '/org')
+@Resource(uri = '/org', superClass = VRestfulController)
 class Org {
 
     Org parent
