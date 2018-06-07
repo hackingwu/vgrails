@@ -68,6 +68,12 @@ class EmployeeController {
         println Employee.constrainedProperties.keySet()
         println Employee.gormPersistentEntity.persistentPropertyNames
 
+        println Employee.constrainedProperties*.getKey()
+
+        Employee.constrainedProperties*.getKey().each{
+            println Employee.constrainedProperties[it]
+        }
+
         respond employeeService.list(params), model:[employeeCount: employeeService.count()]
 
         return
