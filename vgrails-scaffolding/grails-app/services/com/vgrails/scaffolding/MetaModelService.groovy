@@ -57,7 +57,7 @@ class MetaModelService {
         domain.packageName=clazz.package.name
 
         Map m=null
-        //忽略未定义m引起的MissingPropertyException
+        //忽略未定义m引起的Exception
         try{ m=clazz['m']}catch(Exception e){}
 
         //如果m为空，填写默认值

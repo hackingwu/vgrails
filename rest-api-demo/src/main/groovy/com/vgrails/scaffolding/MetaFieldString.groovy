@@ -32,5 +32,4 @@ class MetaFieldString extends MetaField{
     String notEqual
     /** 控件类型 */
     String widget="TextField"
-
 }

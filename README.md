@@ -1,4 +1,3 @@
-
 # VGRAILS企业应用快速开发脚手架
 
 ![alt text](https://github.com/vgrails/vgrails/blob/master/logo.png)
