@@ -20,7 +20,11 @@ class VRestfulController extends RestfulController{
 
     def meta() {
         respond MetaModelService.GetModel(resource.getSimpleName())
-
         return
+    }
+
+    @Override
+    Object index(Integer max) {
+        return super.index(max)
     }
 }
