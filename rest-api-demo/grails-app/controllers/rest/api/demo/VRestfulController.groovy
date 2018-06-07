@@ -1,6 +1,6 @@
 package rest.api.demo
 
-
+import com.vgrails.scaffolding.MetaModelService
 import grails.rest.*
 import grails.converters.*
 
@@ -19,8 +19,8 @@ class VRestfulController extends RestfulController{
     }
 
     def meta() {
-        println("meta")
+        respond MetaModelService.GetModel(resource.getSimpleName())
 
-        render resource.gormPersistentEntity.persistentPropertyNames
+        return
     }
 }

@@ -3,11 +3,11 @@ package rest.api.demo
 class UrlMappings {
 
     static mappings = {
-//        "/$controller/$action?/$id?(.$format)?"{
-//            constraints {
-//                // apply constraints here
-//            }
-//        }
+        "/$controller/$action?/$id?(.$format)?"{
+            constraints {
+                // apply constraints here
+            }
+        }
 
         get "/$controller/m(.$format)" (action: "meta")
 
