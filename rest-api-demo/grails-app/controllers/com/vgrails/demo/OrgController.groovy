@@ -13,6 +13,7 @@ class OrgController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+
         respond orgService.list(params), model:[orgCount: orgService.count()]
     }
 

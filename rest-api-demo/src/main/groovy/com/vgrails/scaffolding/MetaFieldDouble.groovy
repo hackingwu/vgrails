@@ -3,7 +3,7 @@ package com.vgrails.scaffolding
 import grails.compiler.GrailsCompileStatic
 
 /**
- * long元数据
+ * double元数据
  *
  *  @author bale_lin
  *
@@ -11,12 +11,15 @@ import grails.compiler.GrailsCompileStatic
  */
 
 @GrailsCompileStatic
-class MetaFieldLong extends MetaField{
+class MetaFieldDouble extends MetaField{
 
     /** 最大值 */
-    long max
+    double max
     /** 最小值 */
-    long min
+    double min
       /** 默认值 */
-    long defaults = Long.MIN_VALUE
+    double defaults = Double.MIN_VALUE
+
+    /** 保留小数点 */
+    int decimals = 4
 }
