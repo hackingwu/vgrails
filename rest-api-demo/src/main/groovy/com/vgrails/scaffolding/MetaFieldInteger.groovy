@@ -11,7 +11,7 @@ import grails.compiler.GrailsCompileStatic
  */
 
 @GrailsCompileStatic
-class MetaFieldInt extends MetaField{
+class MetaFieldInteger extends MetaField{
 
     /** 最大值 */
     int max

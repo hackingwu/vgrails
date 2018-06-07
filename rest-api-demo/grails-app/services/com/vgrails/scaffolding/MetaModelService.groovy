@@ -85,9 +85,22 @@ class MetaModelService {
             if(constraints[i].propertyType.simpleName == "String")
             {
                 field=new MetaFieldString()
+            }else if(constraints[i].propertyType.simpleName in ["Boolean", "boolean"])
+            {
+                field=new MetaFieldBoolean()
+            }else if(constraints[i].propertyType.simpleName in ["Integer", "int"])
+            {
+                field=new MetaFieldInteger()
             }else if(constraints[i].propertyType.simpleName in ["Long", "long"])
             {
                 field=new MetaFieldLong()
+            }else if(constraints[i].propertyType.simpleName in ["Float", "float"])
+            {
+                field=new MetaFieldFloat()
+            }
+            else if(constraints[i].propertyType.simpleName in ["Double", "double"])
+            {
+                field=new MetaFieldDouble()
             }
             //TODO: 需要考虑，embed和enum
             else{
